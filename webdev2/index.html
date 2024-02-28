@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<h1>WEB DEVELOPMENT 2</h1>
+<body>
+    
+</body>
+</html>
+
+<script>
+    function isOdd(number) {
+    return new Promise((resolve, reject) => {
+        if (number % 2 !==0) {
+            resolve(true);
+        } else {
+            reject(false);
+        } 
+    });
+}
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9,];
+
+async function checkNumbers() {
+    for (let number of numbers) {
+        try {
+            await isOdd(number);
+            console.log(`${number} is odd.`);
+        } catch (error) {
+        }
+    }
+}
+
+checkNumbers();
+
+function getRandomCharacter() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+          const characters = 'qwertyuiop';
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          const randomCharacter = characters[randomIndex];
+            resolve(randomCharacter);
+        }, 500);
+        });
+     }
+     
+     async function resolve() {
+        const randomCharacter = await getRandomCharacter();
+        console.log("Random character:", randomCharacter);
+     }
+
+     resolve();
+
+     function getData() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject("Error: Data cannot be retrieved.");
+            }, 500);
+            });
+        }
+    
+        async function reject() {
+            try {
+              await getData();
+            } catch (error) {
+             console.log(error);
+            }
+        }
+
+    reject();
+
+    function rejectResolve() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject("Error:  Failed.");
+            }, 500);
+            setTimeout(() => {
+                resolve("Success: Completed.");
+            }, 500);
+        });
+    }
+
+async function rejectAndResolve() {
+    try {
+      const result1 = await rejectResolve();
+      console.log(result1);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+rejectAndResolve();
+</script>
